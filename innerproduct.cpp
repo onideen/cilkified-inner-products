@@ -1,15 +1,15 @@
 /*
 Homework 4 : Cilkified Inner Products.
-Team member 1 : Jane Doe
-Team member 2 : John Doe
+Team member 1 : Arne Bjune
+Team member 2 : Vegar Engen
 */
 
-#include<cilk.h>
-#include<iostream>
-#include<string.h>
-#include<stdio.h>
-#include<stdlib.h>
-#include<numeric>
+#include <cilk.h>
+#include <iostream>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <numeric>
 
 #include "functions.h"
 
