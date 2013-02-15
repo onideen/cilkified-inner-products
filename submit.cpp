@@ -14,6 +14,8 @@ Team member 2 : Vegar Engen
 
 #include "functions.h"
 
+#define COARSENESS 10
+
 int rec_cilkified(int *a,int *b,unsigned int n)
 {
 
@@ -38,7 +40,19 @@ int rec_cilkified(int *a,int *b,unsigned int n)
 
 int loop_cilkified(int *a,int *b,unsigned int n)
 {
-	return 360;
+	int i,c = COARSENESS, sum = 0;
+	int temp[n/c], k[n/c];
+	
+	cilk_for(int j=0; j< n / c ;j++){
+		for(k[j] = 0; k[j] < c; k[j]++){
+			temp[j] += a[k[j] + j* c]*b[k[j] +j*c];
+		}
+	}
+
+	for(i =0; i<n/c; i++){
+		sum += temp[i];
+	}
+	return sum;
 }
 
 int hyperobject_cilkified(int *a,int *b,unsigned int n)

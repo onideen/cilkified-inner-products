@@ -26,8 +26,12 @@ int cilk_main(int argc, char **argv)
 	unsigned int n;
 
 	// Size calculation
-	n = (unsigned int)atoi(argv[1]);
-	
+	if(argc >1){
+		n = (unsigned int)atoi(argv[1]);
+	}else{
+		n = 1000000;
+	}
+
 	// Array allocation	
 	int *a,*b;
 	a = (int *)malloc(sizeof(int)*n);
