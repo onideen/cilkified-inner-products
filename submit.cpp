@@ -10,13 +10,30 @@ Team member 2 : Vegar Engen
 #include <stdio.h>
 #include <stdlib.h>
 #include <numeric>
+#include <math.h>
 
 #include "functions.h"
 
 int rec_cilkified(int *a,int *b,unsigned int n)
 {
-	printf("A is %d long\n", sizeof a /sizeof(int));
-	return 1;
+
+	if ( n == 1) return a[0]*b[0];
+	else {
+
+		int *leftA = a;
+		int *rightA = a + (int)ceil(n/2);
+		
+		int *leftB = b;
+		int *rightB = b + (int)ceil(n/2);
+		
+		int sumLeft, sumRight;
+		
+		sumLeft = cilk_spawn rec_cilkified(leftA, leftB, ceil(n/2)); 
+		sumRight = cilk_spawn rec_cilkified(rightA, rightB, n-ceil(n/2));
+
+		cilk_sync;
+		return sumRight+sumLeft;
+	}
 }
 
 int loop_cilkified(int *a,int *b,unsigned int n)
