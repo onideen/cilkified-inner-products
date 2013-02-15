@@ -13,18 +13,20 @@ Team member 2 : Vegar Engen
 
 #include "functions.h"
 
-#define COARSENESS 10
+#define COARSENESS 1000
 
 int rec_cilkified(int *a,int *b,unsigned int n)
 {
-//	printf("A is %d long\n", sizeof a /sizeof(int));
+	printf("A is %d long\n", sizeof a /sizeof(int));
 	return 1;
 }
 
 int loop_cilkified(int *a,int *b,unsigned int n)
 {
 	int i,c = COARSENESS, sum = 0;
-	int temp[n/c], k[n/c];
+	int *temp, *k;
+	temp = (int *)malloc(sizeof(int)*(n/c));
+	k = (int *)malloc(sizeof(int)*(n/c));
 	
 	cilk_for(int j=0; j< n / c ;j++){
 		for(k[j] = 0; k[j] < c; k[j]++){

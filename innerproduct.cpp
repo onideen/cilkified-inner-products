@@ -44,6 +44,7 @@ int cilk_main(int argc, char **argv)
 	
 	// Compute inner product for each method
 	rec_result = rec_cilkified(a,b,n);
+	printf("Running loop_result\n");
 	loop_result = loop_cilkified(a,b,n);
 	hyper_result = hyperobject_cilkified(a,b,n);
 	
