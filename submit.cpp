@@ -11,6 +11,7 @@ Team member 2 : Vegar Engen
 #include <stdlib.h>
 #include <numeric>
 #include <math.h>
+#include <reducer_opadd.h>
 
 #include "functions.h"
 
@@ -18,8 +19,14 @@ Team member 2 : Vegar Engen
 
 int rec_cilkified(int *a,int *b,unsigned int n)
 {
-
-	if ( n == 1) return a[0]*b[0];
+	if ( n < COARSENESS) {
+		int sum = 0;
+		int i;
+		for (i = 0; i < n; ++i) {
+			sum += a[i] * b[i];
+		}
+		return sum;
+	}
 	else {
 
 		int *leftA = a;
@@ -57,6 +64,13 @@ int loop_cilkified(int *a,int *b,unsigned int n)
 
 int hyperobject_cilkified(int *a,int *b,unsigned int n)
 {
+	/*
+	cilk::hyperobject<cilk::reducer_opadd<int> > sum;
+	cilk_for(size_t i = 0; i < n; i++) {
+		sum += a[i] * b[i];
+	}
 	return 1;
+
+	*/
 }
 
