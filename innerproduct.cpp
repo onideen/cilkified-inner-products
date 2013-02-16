@@ -61,7 +61,7 @@ int cilk_main(int argc, char **argv)
 	start = elapsed_seconds();
 	start = elapsed_seconds();
 
-	for (i = 0; i < 1000; ++i) {
+	for (i = 0; i < iterations; ++i) {
 		rec_result = rec_cilkified(a,b,n);
 	}
 	end = elapsed_seconds();
@@ -69,7 +69,7 @@ int cilk_main(int argc, char **argv)
 	rec_time = end-start;
 
 	start = elapsed_seconds();
-	for (i = 0; i < 1000; ++i) {
+	for (i = 0; i < iterations; ++i) {
 		loop_result = loop_cilkified(a,b,n);
 	}
 	end = elapsed_seconds();
@@ -78,7 +78,7 @@ int cilk_main(int argc, char **argv)
 
 	start = elapsed_seconds();
 
-	for (i = 0; i < 1000; ++i) {
+	for (i = 0; i < iterations; ++i) {
 		hyper_result = hyperobject_cilkified(a,b,n);
 	}
 	end = elapsed_seconds();
