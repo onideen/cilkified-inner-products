@@ -38,13 +38,17 @@ int cilk_main(int argc, char **argv)
 	b = (int *)malloc(sizeof(int)*n);
 
 	int loop_result, rec_result, hyper_result, ref_result; 
-	
+//	int time1,time2,time3,time4;
+	struct timezone zone;
+	struct time1, time2;
 	// Initialize arrays
 	fill_arrays(a,b,n);
 	
-	// Compute inner product for each method
+	// Compute inner product for each method\
+	gettimeofday(&time1,&zone);
 	rec_result = rec_cilkified(a,b,n);
-	printf("Running loop_result\n");
+	gettimeofday(&time2,&zone);
+	printf("Time :%i \n", time2.tv_usec - time1.tv_usec);
 	loop_result = loop_cilkified(a,b,n);
 	hyper_result = hyperobject_cilkified(a,b,n);
 	

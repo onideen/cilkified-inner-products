@@ -52,7 +52,7 @@ int loop_cilkified(int *a,int *b,unsigned int n)
 	int *temp, *k;
 	temp = (int *)malloc(sizeof(int)*(n/c));
 	k = (int *)malloc(sizeof(int)*(n/c));
-	
+	memset(temp,0, sizeof(int)*(n/c));
 	cilk_for(int j=0; j< n / c ;j++){
 		for(k[j] = 0; k[j] < c; k[j]++){
 			temp[j] += a[k[j] + j* c]*b[k[j] +j*c];
@@ -62,18 +62,22 @@ int loop_cilkified(int *a,int *b,unsigned int n)
 	for(i =0; i<n/c; i++){
 		sum += temp[i];
 	}
+	free(temp);
+	free(k);
 	return sum;
 }
 
 int hyperobject_cilkified(int *a,int *b,unsigned int n)
 {
-	/*
-	cilk::hyperobject<cilk::reducer_opadd<int> > sum;
-	cilk_for(size_t i = 0; i < n; i++) {
+	cilk::reducer_opadd<int>  sum;
+	
+ 	
+	cilk_for(int i = 0; i < n; i++) {
 		sum += a[i] * b[i];
 	}
-	return 1;
+	
+	return sum.get_value();
 
-	*/
+	
 }
 
