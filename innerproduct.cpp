@@ -17,7 +17,6 @@ Team member 2 : Vegar Engen
 
 // Function declarations
 void fill_arrays(int *a, int *b, int n);
-long long elapsed_nseconds();
 double elapsed_seconds();
 
 using namespace std;
@@ -107,15 +106,6 @@ void fill_arrays(int *a, int *b, int n)
 		a[i] = 1;	
 		b[i] = 3;
 	}
-}
-
-
-long long elapsed_nseconds() {
-	struct timespec ts;
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-	long long time1 = ts.tv_sec * 1000000000 + ts.tv_nsec;
-
-	return time1;
 }
 
 double elapsed_seconds()
